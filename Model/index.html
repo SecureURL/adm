@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Models Name Entry</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <h2>Models Name</h2>
+    </header>
+    <section class=" CRUDContainer">
+
+        <div class="actionBtns">
+            <input type="text" name="" id="SearchBox" placeholder="Search Data">
+        </div>
+        <div class="DataTabularFormat">
+            <h2>All Models <i class="fas fa-sync-alt"></i></h2>
+            <div class="ModelsContainer" id="ModelsContainer">
+                <div class="ModelsUndone" id="ModelsUndone"></div>
+                <div class="Modelsdone" id="Modelsdone"></div>
+            </div>
+        </div>
+    </section>
+    <div class="bottom">
+        <section class="container">
+            <div class="formInputs">
+                <input type="text" name="" id="P_Title" placeholder="Enter Model Name">
+                <span style="display: flex;"> 
+                    <p>Is Content Published</p>
+                    <div class="CenterAll">
+                        <label class="switch">
+                            <input name="theme" type="checkbox" id="toggle_Published">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </span>
+                <button id="submitBTN">Save</button>
+            </div>
+        </section>
+        <footer>
+            <p></p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        setInterval(() => {
+            document.querySelector("footer p").innerHTML = Date();
+        }, 1000);
+    </script>
+</body>
+
+</html>

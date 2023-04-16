@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Links Entry</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <h2>Personal Links</h2>
+    </header>
+    <div class="option-container">
+        <button id="showDatabtn">Show Personal Links</button>
+        <button id="">Add Personal Links</button>
+    </div>
+    <section class=" CRUDContainer">
+
+        <div class="actionBtns">
+            <input type="text" name="" id="SearchBox" placeholder="Search Data">
+        </div>
+        <div class="showOnlyBox">
+            <span>
+                <p>Show only UnPublished</p>
+                <div class="CenterAll">
+                    <label class="switch">
+                        <input name="theme" type="checkbox" id="toggle_UnPublished">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </span>
+        
+            <span>
+                <p>Not Search Console</p>
+                <div class="CenterAll">
+                    <label class="switch">
+                        <input name="theme" type="checkbox" id="toggle_SearchConsole">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </span>
+        
+            <span>
+                <p>Articles without Thumb</p>
+                <div class="CenterAll">
+                    <label class="switch">
+                        <input name="theme" type="checkbox" id="toggle_withoutThumb">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </span>
+        </div>
+        <div class="DataTabularFormat">
+            <h2>All Data</h2>
+            <div class="table-holder">
+                <table class="data-wrapper">
+                </table>
+            </div>
+            <div class="paginationBtn">
+                <button><i class="fas fa-chevron-left"></i></button>
+                <button><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        <div class="formInputs">
+
+            <input type="text" name="" id="P_Title" placeholder="Enter Post Title">
+            <input type="text" name="" id="P_URL" placeholder="Enter Post URL">
+            <input type="text" name="" id="Blog" placeholder="Enter Blog Name" list="Blog-list">
+            <p>Upload Post Thumbnail</p>
+            <span>
+                <input type="file" name="" id="filePicker" placeholder="Choose the Thumbnail" onchange="getBaseUrl()"
+                    style="display: none;">
+                <div>
+                    <input type="text" name="" id="Img_URL" placeholder="Enter Image URL">
+                    <button id="imgFetch">Set Image</button>
+                </div>
+                <img src="https://ssl.gstatic.com/docs/templates/thumbnails/sheets-blank-googlecolors.png" id="thumbImg"
+                    alt="">
+            </span>
+
+            <span>
+                <p>Is the Post Published?</p>
+                <div class="CenterAll">
+                    <label class="switch">
+                        <input name="theme" type="checkbox" id="toggle_Post">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <input type="date" name="" id="publishingDate" style="display: none;">
+            </span>
+
+            <span>
+                <p>Is Submitted to Search Console?</p>
+                <div class="CenterAll">
+                    <label class="switch">
+                        <input name="theme" type="checkbox" id="toggle_SConsole">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </span>
+            <span>
+                <p>Is Published on Pinterest?</p>
+                <div class="CenterAll">
+                    <label class="switch">
+                        <input name="theme" type="checkbox" id="toggle_Pinterest">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </span>
+            <span>
+                <p>Is Published on Twitter?</p>
+                <div class="CenterAll">
+                    <label class="switch">
+                        <input name="theme" type="checkbox" id="toggle_Twitter">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </span>
+            <span>
+                <p>Is Published on Facebook Reels?</p>
+                <div class="CenterAll">
+                    <label class="switch">
+                        <input name="theme" type="checkbox" id="toggle_Reels">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </span>
+            <button id="submitBTN">Save</button>
+        </div>
+        <datalist id="Blog-list">
+        </datalist>
+    </section>
+
+
+    <footer>
+        <p></p>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+        setInterval(() => {
+            document.querySelector("footer p").innerHTML = Date();
+        }, 1000);
+    </script>
+</body>
+
+</html>

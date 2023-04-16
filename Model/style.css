@@ -1,0 +1,392 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    transition: 0.5s all ease-in-out;
+}
+
+.flex{
+    display: flex;
+}
+
+header {
+    background-color: #303134;
+    color: #f4f4f4;
+}
+header *{
+    color: #f4f4f4;
+    text-decoration: none;
+
+}
+
+header h2{
+    padding: 15px;
+}
+button {
+    cursor: pointer;
+}
+
+header a img {
+    height: 25px;
+    margin: 10px;
+}
+.option-container{
+    background-color: #202124;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.container {
+    background-color: #202124;
+    display: flex;
+    padding: 25px;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.formsStyles {
+    width: 50%;
+    color: #e8eaed;
+}
+
+.LeftSideBar {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.LeftSideBar button {
+    border-radius: 50px;
+    padding: 10px;
+    width: 150px;
+    border: 2px solid #FF5722;
+    margin: 5px;
+    background-color: orange;
+    color: #fff;
+    font-weight: bolder;
+}
+
+.LeftSideBar button:hover {
+    border: 2px solid orange;
+    background-color: #FF5722;
+}
+
+.RightSideBar {
+    width: 70%;
+}
+
+.RightSideBar .panel {
+    display: flex;
+    flex-direction: column;
+}
+.bottom{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.CRUDContainer .actionBtns {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.CRUDContainer input {
+    margin: 5px 0;
+    border-radius: 9px;
+    padding: 5px;
+}
+.CRUDContainer .DataTabularFormat .table-holder{
+    overflow: auto;
+}
+.CRUDContainer .DataTabularFormat .ModelsContainer{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-bottom: 30vh;
+}
+
+.CRUDContainer .DataTabularFormat .ModelsContainer .ModelsUndone{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.CRUDContainer .DataTabularFormat .ModelsContainer .Models {
+    border: 2px solid #fff;
+    border-radius: 50px;
+    padding: 5px 15px;
+    margin: 10px 15px;
+    cursor: pointer;
+}
+
+.CRUDContainer .DataTabularFormat .ModelsContainer i {
+    margin: 0 5px;
+}
+
+.CRUDContainer .DataTabularFormat table {
+    width: 100%;
+    padding: 5px;
+}
+
+.CRUDContainer .DataTabularFormat table th{
+    background-image: linear-gradient(180deg, #4caf50, #2e3f1a);
+    border-radius: 5px;
+    border: 1px solid green;
+    padding: 20px 0;
+}
+.CRUDContainer .DataTabularFormat table th:hover{
+    background-image: linear-gradient(45deg, #2e3f1a, #4caf50);
+}
+
+.CRUDContainer .DataTabularFormat table td{
+    padding: 5px;
+    border: 1px solid grey;
+    border-radius: 3px;
+    overflow: hidden;
+    max-width: 200px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.CRUDContainer .DataTabularFormat table td:hover{
+    background-image: linear-gradient(45deg, #242424, #404040);
+}
+
+.CRUDContainer .DataTabularFormat table i{
+    cursor:pointer;
+}
+
+.CRUDContainer .DataTabularFormat table td a{
+    color:#fff;
+}
+
+.CRUDContainer .DataTabularFormat table tr.undone{
+    background-image: linear-gradient(180deg, #c73636, transparent);
+}
+
+.CRUDContainer .DataTabularFormat table .showTableRow
+{
+    display: table-row;
+}
+
+.CRUDContainer .DataTabularFormat table .hideTableRow
+{
+    display: none;
+}
+
+.CRUDContainer .DataTabularFormat table tr td:last-child(){
+    max-width: 330px;
+}
+.CRUDContainer .DataTabularFormat table td,
+.CRUDContainer .DataTabularFormat table th {
+    text-align: center;
+    padding: 5px;
+    overflow: hidden;
+    max-width: 200px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.CRUDContainer .DataTabularFormat table td a{
+    color:#fff;
+}
+
+.CRUDContainer .DataTabularFormat button , .formInputs button, .option-container button {
+    border-radius: 50px;
+    padding: 5px;
+    width: 150px;
+    border: 2px solid #09b33c;
+    margin: 5px;
+    background-color: #1c8d0d;
+    color: #fff;
+    font-weight: bolder;
+}
+
+.CRUDContainer .DataTabularFormat button:hover, .formInputs button:hover  {
+    background-color: #09b33c;
+}
+
+.RightSideBar .data-entry-form {
+    display: flex;
+}
+
+.formInputs {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    width: 50%;
+}
+
+.formInputs input {
+    margin: 5px 0;
+    border-radius: 9px;
+    padding: 5px;
+}
+
+.formInputs img{
+    border-radius: 15px;
+    border: 5px dashed green;
+    height: 100px;
+    cursor:pointer;
+} 
+
+.formInputs span {
+    display: flex;
+    align-items: center;
+}
+
+.CenterAll{
+    padding: 0 10px;
+}
+
+.RightSideBar .data-entry-form .DataCounter {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.RightSideBar button {
+    border-radius: 50px;
+    padding: 10px;
+    width: 150px;
+    border: 2px solid #00cc44;
+    margin: 5px;
+    background-color: #3ad40b;
+    color: #fff;
+    font-weight: bolder;
+}
+
+.RightSideBar button:hover {
+    background-color: #00cc44;
+}
+
+.CRUDContainer {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+    padding: 30px;
+    color: #fff;
+    min-height: 60vh;
+    background-color: #303134;
+}
+.CRUDContainer .data-wrapper{
+    overflow: auto;
+}
+.CRUDContainer .data-wrapper .data{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.CRUDContainer .data-wrapper .data span
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.CRUDContainer .DataTabularFormat .ModelsContainer .Models.active {
+    background-color: forestgreen;
+}
+
+.CRUDContainer .paginationBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+footer {
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #FFF;
+    background-color: #007acc;
+}
+.hide{
+    display: none;
+}
+
+ /*--------- CSS for Switch Button------------*/
+ .switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    margin: 10px 0;
+    height: 20px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    margin: 0 !important;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 13px;
+    width: 13px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(18px);
+    -ms-transform: translateX(18px);
+    transform: translateX(18px);
+}
+ /* Rounded sliders */
+ .slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+@media (max-width:720px) {
+    .formInputs{
+        width:100%;
+    }
+    .CRUDContainer .data-wrapper .data{
+        justify-content: flex-start;
+    }
+    .CRUDContainer .data-wrapper .data span
+    {
+        margin: 0 10px;
+    }
+}
