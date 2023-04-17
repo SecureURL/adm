@@ -22,10 +22,8 @@ document.getElementById("thumbImg").addEventListener("click", () => {
 
 ImgSetBtn.addEventListener("click", () => {
     console.log("Set Btn Clicked")
-    if (document.getElementById("Img_URL").value != "") {
-        ImgThumbValue = document.getElementById("Img_URL").value;
+    ImgThumbValue = document.getElementById("Img_URL").value;
         document.getElementById("thumbImg").setAttribute("src", document.getElementById("Img_URL").value );
-    }
 });
 
 postDtToggle.addEventListener("change", () => {
@@ -51,8 +49,12 @@ showDataButton.addEventListener("click", () => {
         })
 });
 
-SaveBtn.addEventListener("click", () => {
+document.getElementById("AddLinksBtn").addEventListener("click", () => { 
+    var elmntToView = document.querySelector(".container .formInputs");
+    elmntToView.scrollIntoView();
+})
 
+SaveBtn.addEventListener("click", () => {
     var value_P_Title = document.getElementById("P_Title").value;
     var value_P_URL = document.getElementById("P_URL").value;
     var value_Blog = document.getElementById("Blog").value;
@@ -109,10 +111,19 @@ SaveBtn.addEventListener("click", () => {
                 document.getElementById("toggle_Reels").checked = false;
                 document.getElementById("thumbImg").setAttribute("src", "https://ssl.gstatic.com/docs/templates/thumbnails/sheets-blank-googlecolors.png");
                 LoadData();
+                SaveBtn.innerText = "Save";
+                ImgThumbValue = "";
                 return;
             });
     }
-    
+
+    if (postDtToggle.checked == true)
+    {
+        postDtToggle.checked = false;
+        document.getElementById("publishingDate").style.display = "block";
+    }
+    initialLoad();
+
 })
 
 function LoadData() {
@@ -180,6 +191,7 @@ function LoadData() {
         }
         dataTable.insertAdjacentHTML("afterbegin", table_header);
         const FEBlogList = document.querySelector("#Blog-list");
+        FEBlogList.innerHTML = "";
         for (let index = 0; index < BlogNamesList.length; index++) {
             FEBlogList.insertAdjacentHTML("afterbegin", `<option>${BlogNamesList[index]}</option>`);
         }
@@ -277,18 +289,21 @@ const toDataURL = url => fetch(url)
     reader.readAsDataURL(blob)
   }))
 
-fetch(API_URL + `getFullData=true`)
-.then(response => response.json())
-.then(data => {
-    try {
-        if (data.Data.toLowerCase() == "No Data Found".toLowerCase()) {
-        }
-    } catch (error) {
-        AllData = Object.values(data.Data);
-        console.log(AllData);
-    }
-    LoadData(); // Loading Data at the begining
-})
+function initialLoad() {
+    fetch(API_URL + `getFullData=true`)
+        .then(response => response.json())
+        .then(data => {
+            try {
+                if (data.Data.toLowerCase() == "No Data Found".toLowerCase()) {
+                }
+            } catch (error) {
+                AllData = Object.values(data.Data);
+                console.log(AllData);
+            }
+            LoadData(); // Loading Data at the begining
+        })
+}
+initialLoad();
   /*
 https://script.google.com/macros/s/AKfycbz_aSftsT_yOnhlHKr9OL6kF5ywznzZilkc5ovzODHo3p4iI7dSvaiaIIpBbXEar9b3bQ/exec?
 
