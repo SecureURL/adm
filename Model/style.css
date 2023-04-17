@@ -100,6 +100,9 @@ header a img {
     border-radius: 9px;
     padding: 5px;
 }
+.CRUDContainer .DataTabularFormat #ReloadData{
+    cursor: pointer;
+}
 .CRUDContainer .DataTabularFormat .table-holder{
     overflow: auto;
 }
@@ -107,10 +110,10 @@ header a img {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding-bottom: 30vh;
+    padding-bottom: 45vh; 
 }
 
-.CRUDContainer .DataTabularFormat .ModelsContainer .ModelsUndone{
+.CRUDContainer .DataTabularFormat .ModelsContainer .ModelHolder{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -119,9 +122,10 @@ header a img {
 .CRUDContainer .DataTabularFormat .ModelsContainer .Models {
     border: 2px solid #fff;
     border-radius: 50px;
-    padding: 5px 15px;
-    margin: 10px 15px;
+    padding: 5px 10px;
+    margin: 8px;
     cursor: pointer;
+    font-size: small;
 }
 
 .CRUDContainer .DataTabularFormat .ModelsContainer i {
