@@ -6,6 +6,9 @@ var showDataButton = document.getElementById("showDatabtn");
 var btnUnPublished = document.getElementById("toggle_UnPublished");
 var btnSearchConsole = document.getElementById("toggle_SearchConsole");
 var btnwithoutThumb = document.getElementById("toggle_withoutThumb");
+var searchTxtBox = document.getElementById("SearchBox");
+
+var btnCopyTitle;
 
 var EditDataButton;
 var DeleteDataButton;
@@ -21,7 +24,7 @@ document.getElementById("thumbImg").addEventListener("click", () => {
 });
 
 ImgSetBtn.addEventListener("click", () => {
-    console.log("Set Btn Clicked")
+    //console.log("Set Btn Clicked")
     ImgThumbValue = document.getElementById("Img_URL").value;
         document.getElementById("thumbImg").setAttribute("src", document.getElementById("Img_URL").value );
 });
@@ -42,7 +45,7 @@ showDataButton.addEventListener("click", () => {
                 }
             } catch (error) {
                 AllData = Object.values(data.Data);
-                console.log(AllData);
+                //console.log(AllData);
             }
 
             LoadData(); // Loading Data at the begining
@@ -131,7 +134,7 @@ function LoadData() {
     var dataTable = document.querySelector(".data-wrapper");
     dataTable.innerHTML = "";
     var table_header = `<tr>
-    <th>Article Title</th>
+    <th colspan="2">Article Title</th>
     <th>Blog name</th>
     <th>Published</th>
     <th>Search Console</th>
@@ -161,9 +164,9 @@ function LoadData() {
             <tr id=${AllData[i][0]} class="${checkStatus}">`;
             
             if (AllData[i][2] == "")
-                dataValues +=`<td><a><p>${AllData[i][1]}</p></a></td>`;
+                dataValues +=`<td><i class="fas fa-copy"></td><td><a><p>${AllData[i][1]}</p></a></td>`;
             else
-                dataValues +=`<td><a target="_blank" href="${AllData[i][2]}"><p>${AllData[i][1]}</p></a></td>`;
+                dataValues +=`<td><i class="fas fa-copy"></td><td><a target="_blank" href="${AllData[i][2]}"><p>${AllData[i][1]}</p></a></td>`;
             
             dataValues += `<td>${AllData[i][3]}</td>`;
             
@@ -197,13 +200,31 @@ function LoadData() {
         }
 
         tableRows = document.querySelectorAll(".data-wrapper tr");
-
+        
+        btnCopyTitle = document.querySelectorAll("table .fa-copy");
         EditDataButton = document.querySelectorAll(".CRUDContainer .DataTabularFormat table .fa-edit");
-        EditDataFeature();
-
         DeleteDataButton = document.querySelectorAll(".CRUDContainer .DataTabularFormat table .fa-trash");
+
+        CopyTitleFeature();
+        EditDataFeature();
         DeleteDataFeature();
+
+        enableSearch();
     }
+}
+
+function enableSearch() {
+    searchTxtBox.addEventListener("keyup", () => {
+        tableRows.forEach(DataRow => {
+            if (DataRow != tableRows[0]) {
+                if ((DataRow.children[1].innerText.toLowerCase() + DataRow.children[2].innerText.toLowerCase()).includes(searchTxtBox.value.toLowerCase()) == false)
+                    DataRow.classList.add("hide");
+                else
+                    DataRow.classList.remove("hide");   
+            }
+        });
+        //if (tableRows. searchTxtBox.value.toLowerCase())
+    })
 }
 
 function getBaseUrl() {
@@ -218,6 +239,25 @@ function getBaseUrl() {
 
     };
     reader.readAsDataURL(file);
+}
+
+function copyText(textToCopy) {
+    navigator.clipboard.writeText(textToCopy)
+        .then(() => {
+            //triggerMessage("success", "New URL Copied");
+            alert("Text copied to clipboard!");
+        })
+        .catch((error) => {
+            console.error("Error copying text: ", error);
+        });
+}
+
+function CopyTitleFeature() { 
+    btnCopyTitle.forEach(element => {
+        element.parentElement.addEventListener("click", () => {
+            copyText(element.parentElement.nextSibling.textContent);
+        });
+    });
 }
 
 function EditDataFeature(){
@@ -298,7 +338,7 @@ function initialLoad() {
                 }
             } catch (error) {
                 AllData = Object.values(data.Data);
-                console.log(AllData);
+                //console.log(AllData);
             }
             LoadData(); // Loading Data at the begining
         })
@@ -318,7 +358,7 @@ btnUnPublished.addEventListener("click", () => {
     if (btnUnPublished.checked == true)
     {
         for (let index = 1; index < tableRows.length; index++) {
-            if (tableRows[index].children[2].innerText != "UNPUBLISHED")
+            if (tableRows[index].children[3].innerText != "UNPUBLISHED")
                 tableRows[index].classList.add("hide");
         }
     }
@@ -333,7 +373,7 @@ btnSearchConsole.addEventListener("click", () => {
     if (btnSearchConsole.checked == true)
     {
         for (let index = 1; index < tableRows.length; index++) {
-            if (tableRows[index].children[3].innerText  != "false")
+            if (tableRows[index].children[4].innerText  != "false")
                 tableRows[index].classList.add("hide");
         }
     }
@@ -348,7 +388,7 @@ btnwithoutThumb.addEventListener("click", () => {
     if (btnwithoutThumb.checked == true)
     {
         for (let index = 1; index < tableRows.length; index++) {
-            if (tableRows[index].children[7].innerText  != "No Image")
+            if (tableRows[index].children[8].innerText  != "No Image")
                 tableRows[index].classList.add("hide");
         }
     }
