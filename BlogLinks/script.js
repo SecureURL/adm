@@ -7,6 +7,7 @@ var btnUnPublished = document.getElementById("toggle_UnPublished");
 var btnSearchConsole = document.getElementById("toggle_SearchConsole");
 var btnwithoutThumb = document.getElementById("toggle_withoutThumb");
 var searchTxtBox = document.getElementById("SearchBox");
+var unpublishedLabel = document.getElementById("lbl_UnPublished");
 
 var btnCopyTitle;
 
@@ -97,7 +98,7 @@ SaveBtn.addEventListener("click", () => {
     else
     {
         var APIString = API_URL + `updateRowData=${selectedPostID}&dt1=${value_P_Title}&dt2=${value_P_URL}&dt3=${value_Blog}&dt4=${value_PostDt}&dt5=${value_SConsole}&dt6=${value_Pinterest}&dt7=${value_Twitter}&dt8=${value_Reels}&dt9=${ImgThumbValue}`;
-            //console.log(APIString);
+        console.log(APIString);
         fetch(APIString)
             .then(response => response.json())
             .then(data => {
@@ -131,6 +132,7 @@ SaveBtn.addEventListener("click", () => {
 
 function LoadData() {
     var dataValues = "";
+    var unpublishedCount = 0;
     var dataTable = document.querySelector(".data-wrapper");
     dataTable.innerHTML = "";
     var table_header = `<tr>
@@ -176,8 +178,10 @@ function LoadData() {
                     AllData[i][4] = AllData[i][4].substring(10, 0);
                 dataValues += `<td>${AllData[i][4]}</td>`;
             }
-            else
+            else {
                 dataValues += `<td>UNPUBLISHED</td>`;
+                unpublishedCount++;
+            }
             
             dataValues += `<td>${AllData[i][5]}</td>
                 <td>${AllData[i][6]}</td>
@@ -210,6 +214,7 @@ function LoadData() {
         DeleteDataFeature();
 
         enableSearch();
+        unpublishedLabel.innerText = `Show only UnPublished (${unpublishedCount})`;
     }
 }
 
@@ -261,6 +266,7 @@ function CopyTitleFeature() {
 }
 
 function EditDataFeature(){
+    document.getElementById("AddLinksBtn").click();
     EditDataButton.forEach(EditBtn => {
         EditBtn.addEventListener("click", () => {
             selectedPostID = EditBtn.parentElement.parentElement.getAttribute("id");

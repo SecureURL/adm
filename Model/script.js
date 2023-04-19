@@ -7,6 +7,9 @@ var CrossModel;
 var ModelNamesListSpan;
 var SelectedModelID = "";
 var CopyModelName;
+
+var unpublishedLabel = document.getElementById("lbl_UnPublished");
+
 var API_URL = "https://script.google.com/macros/s/AKfycbx-W-PBlgb2KmP9hQEF6UxPkuPD4tTU1fsG-oRq3XE7VSL2CkZecC5byx5XuJ0ryruXBQ/exec?";
 
 function InitialLoad()
@@ -74,6 +77,7 @@ saveButton.addEventListener("click", () => {
 });
 
 function LoadData() {
+    var unpublishedCount = 0;
     var dataTable = document.querySelector("#ModelsUndone");
     var dataTable2 = document.querySelector("#Modelsdone");
     dataTable.innerHTML = "";
@@ -82,12 +86,17 @@ function LoadData() {
     if (AllData.length > 0) {
 
         for (i = 0; i < AllData.length; i++) { 
-            if(AllData[i][2] != true)
+            if (AllData[i][2] != true) {
                 dataTable.insertAdjacentHTML("beforeend", `<span id="${AllData[i][0]}" class="Models active">${AllData[i][1]} <i class="far fa-check-circle"></i><i class="fas fa-copy"></i></span>`);
+                unpublishedCount++;
+            }
             else
                 dataTable2.insertAdjacentHTML("beforeend", `<span id="${AllData[i][0]}" class="Models not-active">${AllData[i][1]} <i class="far fa-times-circle"></i></span>`);
                 
         }
+
+        unpublishedLabel.innerText = `All Models (${unpublishedCount})`;
+
         CheckModel = document.querySelectorAll(".Models.active .fa-check-circle");
         CrossModel = document.querySelectorAll(".Models.not-active .fa-times-circle");
         CopyModelName = document.querySelectorAll(".Models.active .fa-copy");
