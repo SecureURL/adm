@@ -4,6 +4,7 @@ var postDtToggle = document.getElementById("toggle_Post");
 var showDataButton = document.getElementById("showDatabtn");
 
 var btnUnPublished = document.getElementById("toggle_UnPublished");
+var btnPublished = document.getElementById("toggle_Published");
 var btnSearchConsole = document.getElementById("toggle_SearchConsole");
 var btnwithoutThumb = document.getElementById("toggle_withoutThumb");
 var searchTxtBox = document.getElementById("SearchBox");
@@ -166,9 +167,9 @@ function LoadData() {
             <tr id=${AllData[i][0]} class="${checkStatus}">`;
             
             if (AllData[i][2] == "")
-                dataValues +=`<td><i class="fas fa-copy"></td><td><a><p>${AllData[i][1]}</p></a></td>`;
+                dataValues +=`<td><i class="fas fa-copy"></td><td title="${AllData[i][1]}"><a><p>${AllData[i][1]}</p></a></td>`;
             else
-                dataValues +=`<td><i class="fas fa-copy"></td><td><a target="_blank" href="${AllData[i][2]}"><p>${AllData[i][1]}</p></a></td>`;
+                dataValues +=`<td><i class="fas fa-copy"></td><td title="${AllData[i][1]}"><a target="_blank" href="${AllData[i][2]}"><p>${AllData[i][1]}</p></a></td>`;
             
             dataValues += `<td>${AllData[i][3]}</td>`;
             
@@ -183,12 +184,17 @@ function LoadData() {
                 unpublishedCount++;
             }
             
-            dataValues += `<td>${AllData[i][5]}</td>
-                <td>${AllData[i][6]}</td>
-                <td>${AllData[i][7]}</td>
-                <td>${AllData[i][8]}</td>`;
+            if (AllData[i][5] == true) dataValues += `<td style="color:cornflowerblue">${AllData[i][5]}</td>`; else dataValues += `<td>${AllData[i][5]}</td>`;
+            if (AllData[i][6] == true) dataValues += `<td style="color:cornflowerblue">${AllData[i][6]}</td>`; else dataValues += `<td>${AllData[i][6]}</td>`;
+            if (AllData[i][7] == true) dataValues += `<td style="color:cornflowerblue">${AllData[i][7]}</td>`; else dataValues += `<td>${AllData[i][7]}</td>`;
+            if (AllData[i][8] == true) dataValues += `<td style="color:cornflowerblue">${AllData[i][8]}</td>`; else dataValues += `<td>${AllData[i][8]}</td>`;
+            
+            /*dataValues += `<td>${AllData[i][6]}</td>`;
+            dataValues += `<td>${AllData[i][7]}</td>`;
+            dataValues += `<td>${AllData[i][8]}</td>`;*/
+
             if (AllData[i][9] == "")
-                dataValues += `<td>No Image</td>`;
+                dataValues += `<td style="color:orangered">No Image</td>`;
             else
                 dataValues += `<td><a target="_blank" href="${AllData[i][9]}"><p>Image</p></a></td>`;
                 
@@ -222,7 +228,7 @@ function enableSearch() {
     searchTxtBox.addEventListener("keyup", () => {
         tableRows.forEach(DataRow => {
             if (DataRow != tableRows[0]) {
-                if ((DataRow.children[1].innerText.toLowerCase() + DataRow.children[2].innerText.toLowerCase()).includes(searchTxtBox.value.toLowerCase()) == false)
+                if ((DataRow.children[1].innerText.toLowerCase() +" "+ DataRow.children[2].innerText.toLowerCase()+" "+ DataRow.children[3].innerText.toLowerCase()).includes(searchTxtBox.value.toLowerCase()) == false)
                     DataRow.classList.add("hide");
                 else
                     DataRow.classList.remove("hide");   
@@ -266,9 +272,12 @@ function CopyTitleFeature() {
 }
 
 function EditDataFeature(){
-    document.getElementById("AddLinksBtn").click();
     EditDataButton.forEach(EditBtn => {
         EditBtn.addEventListener("click", () => {
+            
+            var elmntToView = document.querySelector(".container .formInputs");
+            elmntToView.scrollIntoView();
+            
             selectedPostID = EditBtn.parentElement.parentElement.getAttribute("id");
             for (i = 0; i < AllData.length; i++) { 
                 if (AllData[i][0] == EditBtn.parentElement.parentElement.getAttribute("id"))
@@ -365,6 +374,21 @@ btnUnPublished.addEventListener("click", () => {
     {
         for (let index = 1; index < tableRows.length; index++) {
             if (tableRows[index].children[3].innerText != "UNPUBLISHED")
+                tableRows[index].classList.add("hide");
+        }
+    }
+    else {
+        for (let index = 1; index < tableRows.length; index++) {
+            tableRows[index].classList.remove("hide");
+        }
+    }
+})
+
+btnPublished.addEventListener("click", () => {
+    if (btnPublished.checked == true)
+    {
+        for (let index = 1; index < tableRows.length; index++) {
+            if (tableRows[index].children[3].innerText == "UNPUBLISHED")
                 tableRows[index].classList.add("hide");
         }
     }

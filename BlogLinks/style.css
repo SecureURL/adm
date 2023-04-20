@@ -140,7 +140,9 @@ header a img {
 .CRUDContainer .DataTabularFormat table td a{
     color:#fff;
 }
-
+.CRUDContainer .DataTabularFormat table tr:hover{
+    box-shadow: 0 0 10px 3px;
+}
 .CRUDContainer .DataTabularFormat table tr.undone{
     background-image: linear-gradient(180deg, #c73636, transparent);
 }
