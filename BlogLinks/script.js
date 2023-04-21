@@ -59,6 +59,24 @@ document.getElementById("AddLinksBtn").addEventListener("click", () => {
     elmntToView.scrollIntoView();
 })
 
+document.querySelector(".scrollUp").addEventListener("click", () => {
+    var elmntToView = document.querySelector("#showDatabtn");
+    elmntToView.scrollIntoView();
+})
+
+/*For Back to top starts*/
+document.querySelector('.option-container').addEventListener('scroll', function () {
+    //console.log('main section scrolled');
+    mybutton = document.querySelector(".scrollUp");
+    if (document.querySelector('.option-container').scrollTop > 50 || document.querySelector('.option-container').scrollTop > 50) {
+        mybutton.style.opacity = "1";
+    } else {
+        mybutton.style.opacity = "0";
+    }
+})
+
+/*For Back to top ends*/
+
 SaveBtn.addEventListener("click", () => {
     var value_P_Title = document.getElementById("P_Title").value;
     var value_P_URL = document.getElementById("P_URL").value;
@@ -418,7 +436,7 @@ btnwithoutThumb.addEventListener("click", () => {
     if (btnwithoutThumb.checked == true)
     {
         for (let index = 1; index < tableRows.length; index++) {
-            if (tableRows[index].children[8].innerText  != "No Image")
+            if (tableRows[index].children[8].innerText  != "No Image" && tableRows[index].children[3].innerText != "UNPUBLISHED")
                 tableRows[index].classList.add("hide");
         }
     }

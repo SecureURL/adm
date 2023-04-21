@@ -352,7 +352,24 @@ input:checked+.slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
-
+.scrollUp{
+    opacity: 0;
+}
+.scrollUp i{
+    position: fixed;
+    z-index: 5;
+    bottom: 60px;
+    right: 50px;
+    font-size: xx-large;
+    color: #09b33c;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    background-color: #fff;
+}
+.scrollUp i:hover{
+    box-shadow: 0 0 10px 3px #66ff66;
+}
 .hide{
     display: none;
 }
