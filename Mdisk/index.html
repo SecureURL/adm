@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mdisk Links Database</title>
+    <link rel="stylesheet" href="MdiskStyle.css">
+</head>
+<body>
+    <nav class="logo-container">
+        <a href="">
+            <p>Mdisk Links Database</p>
+        </a>
+        <!-- <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="">Popular Apps</a></li>
+            <li><a href="">Popular Games</a></li>
+        </ul> -->
+    </nav>
+    <section class="admin">
+        <h1 style="text-align: center;"></h1>
+        <div class="form-container">
+            <label for="MdiskLink">Enter Mdisk Link Name</label><input type="text" name="MdiskLink" id="MdiskLink">
+            <label for="MdiskTitle">Enter Title</label><input type="text" name="MdiskTitle" id="MdiskTitle">
+            <label for="MdiskStatus">Enter Status</label>
+                <select name="MdiskStatus" id="MdiskStatus">
+                    <option value="">Please Select</option>
+                    <option value="true">Completed</option>
+                    <option value="false">In-Complete</option>
+                </select>
+            <label for="MdiskDownloadLink">Enter DownloadLink</label><input type="text" name="MdiskDownloadLink" id="MdiskDownloadLink">
+            <button id="btn_Save">Save</button>
+        </div>
+    </section>
+    <button id="btn_ShowAll">Show All Data</button>
+
+    <section class="main-container">
+        <h1 style="text-align: center;"></h1>
+        <table id="allDataTable">
+            <tr>
+                <td>Data 1</td>
+                <td>Data 2</td>
+                <td>Data 3</td>
+                <td>Data 4</td>
+                <td><i class="fa fa-edit"></i> <i class="fa fa-tick"></i></td>
+            </tr>
+        </table>
+        <div class="navBtns">
+            <button id="btn_prev">Previous</button>
+            <button id="btn_next">Next</button>
+        </div>
+    </section>
+    <footer class="footer-section">
+        <span>
+            <script>document.write(new Date().getFullYear())</script> &copy; MDisk Link Database Official
+        </span>
+    </footer>
+
+
+    <script>
+        var Btn_ShowAllData = document.getElementById("btn_ShowAll");
+        let API_URL = "https://script.google.com/macros/s/AKfycbxqZNRUtKNyKoQ8UBg_KHzMjvxXRMuGNb3GnV54JFDYokwNM26ZK7ALImwEOuZyBbOl/exec";
+        var AllDataArray;
+        var AppsAnchor = "";
+        var tableRows = "";
+        var TableRowAmount = 100;
+        
+        var tableScroll_Start;
+        var tableScroll_End;
+        
+        var tableScrollPrev_Start;
+        var tableScrollNext_Start;
+        
+        var tableHeader = `<tr>
+                <th>S.No</th>
+                <th>Mdisk Link</th>
+                <th>Video Title</th>
+                <th>Status</th>
+                <th>Download Link</th>
+                <th>Action</th>
+            </tr>`;
+        
+        function SaveAppsData() {
+            console.log("Save Data Started");
+            var DataValue1 = document.getElementById('MdiskLink').value;
+            var DataValue2 = document.getElementById('MdiskTitle').value;
+            var DataValue3 = document.getElementById('MdiskStatus').value;
+            if(DataValue2 == "")
+                DataValue2 = "Blank";
+            if (DataValue1 != "" && DataValue2 != "" && DataValue3 != "") {
+                fetch(API_URL + '?addRowData=true&dt1=' + DataValue1 + '&dt2=' + DataValue2 + '&dt3=' + DataValue3)
+                    .then(response => response.json())
+                    .then(data => {
+                        InsertDataResponse = data.Data;
+                        alert(InsertDataResponse);
+
+                        document.getElementById('MdiskLink').value = "";
+                        document.getElementById('MdiskTitle').value = "";
+                        document.getElementById('MdiskStatus').value = "";
+                        getRecordsCountPersonalLinks();
+                    })
+            }
+            else 
+                alert("Please enter all the Fields to Submit data");
+        }
+
+        function getRecordsCountPersonalLinks() {
+            fetch(API_URL + '?getTotalRecordsCount=true')
+                .then(response => response.json())
+                .then(data => {
+                    RecordCount = data.Data;
+                    //console.log(RecordCount);
+                    document.querySelector(".admin h1").innerHTML = RecordCount + " Links in Records";
+                })
+        }
+        
+        function getAllRecordsData() {
+            fetch(API_URL + '?getFullData=true')
+                .then(response => response.json())
+                .then(data => {
+                    AllData = Object.values(data.Data);
+                    AllDataArray = AllData;
+                    tableRows = "";
+
+                    if (AllDataArray.length < TableRowAmount){
+                        TableRowAmount = AllDataArray.length;
+                    }
+                    // if (AllDataArray.length >= TableRowAmount) {
+                    //     //tableScroll_End = TableRowAmount;
+                    //     //enable pagination
+                    // }
+                    // else
+                    //     tableScroll_End = AllDataArray.length
+                    
+                    tableScroll_Start = 0;
+
+                    TableScroll(tableScroll_Start);
+                    
+                    createTableData(tableRows);
+                    allTableRows = document.querySelectorAll("#allDataTable tr");
+                })
+        }
+        function createTableData(Data) {
+            document.querySelector("#allDataTable").innerHTML = "";
+            document.querySelector("#allDataTable").innerHTML = tableHeader + Data;
+        }
+
+        function TableScroll(StartFrom){
+            tableRows = "";
+            var from = StartFrom;
+            var to = StartFrom + TableRowAmount;
+            var from, to;
+            for (i = from; i < to; i++) {
+                tableRows += `<tr class='showTableRow'>
+                                <td title='${i}.'>${i+1}.</td>
+                                <td title='${AllData[i][0]}'><a target = "_blank" href="${AllData[i][0]}">${AllData[i][0]}</a></td>
+                                <td title='${AllData[i][1]}'>${AllData[i][1]}</td>
+                                <td title='${AllData[i][2]}'>${AllData[i][2]}</td>
+                                <td title='${AllData[i][3]}'>${AllData[i][3]}</td>
+                                <td style='max-width:333px'><button class='btn_Edit' onclick="fetchDataToUpdate('${AllData[i][0]}')">Edit</button><button class='btn_Delete' onclick='deleteRecord("${AllData[i][0]}")'>Delete</button></td>
+                                </tr>`;
+            }
+            //console.log("Data shown from "+from+" to " + (to-1));
+            createTableData(tableRows);
+            
+            tableScrollPrev_Start = from - TableRowAmount; 
+            tableScrollNext_Start = to; 
+        }
+
+        getRecordsCountPersonalLinks();
+        var myarray = Array.from(document.querySelectorAll(".btn_Edit"));
+        
+        document.querySelector("#btn_next").addEventListener("click" , function(){
+            TableScroll(tableScrollNext_Start);
+        })
+
+        document.querySelector("#btn_prev").addEventListener("click" , function(){
+            TableScroll(tableScrollPrev_Start);
+        })
+
+        //--------------------------
+        document.querySelector("#btn_Save").addEventListener("click" , function(){
+            SaveAppsData();
+        });
+
+        Btn_ShowAllData.addEventListener("click", function () {
+            getAllRecordsData();
+        });
+
+    </script>
+</body>
+</html>
